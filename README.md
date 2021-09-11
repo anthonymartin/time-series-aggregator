@@ -18,26 +18,25 @@ const data = aggregator
 Select a subset of the aggregated time series data. selects grouped collection from start up to, but not including, end position of grouped array.
 
 ```typescript
-let last7Days = data.select(0, 7);
+const last7Days = data.select(0, 7);
 ```
 
 Count the number of objects within your selected granularity:
 
 ```typescript
-let last7 = data.select(0, 7).count(); // returns number of incidents over the last n days
-let last14 = data.select(0, 14).count();
-let last30 = data.select(0, 30).count();
+const last7 = data.select(0, 7).count(); // returns number of incidents over the last n days
+const last14 = data.select(0, 14).count();
+const last30 = data.select(0, 30).count();
 ```
 
 Count occurrences from `n` days ago:
 
 ```typescript
-let nDaysAgo = data.select(8).count();
+const nDaysAgo = data.select(8).count();
 ```
 
 Sum on a field:
 
 ```typescript
-let sum = data.select(0, 30).sum("property_to_sum");
+const sum = data.select(0, 30).sum("property_to_sum");
 ```
-
