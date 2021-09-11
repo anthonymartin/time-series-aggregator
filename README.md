@@ -24,7 +24,7 @@ const last7Days = data.select(0, 7);
 Count the number of objects within your selected granularity:
 
 ```typescript
-const last7 = data.select(0, 7).count(); // returns number of incidents over the last n days
+const last7 = data.select(0, 7).count(); // returns number of objects over the last n days
 const last14 = data.select(0, 14).count();
 const last30 = data.select(0, 30).count();
 ```
