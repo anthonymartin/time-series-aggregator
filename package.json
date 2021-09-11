@@ -1,6 +1,6 @@
 {
   "name": "time-series-aggregator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "aggregate, max, sum, average, count on arbitrary timeseries datasets",
   "main": "dist/TimeSeriesAggregator.js",
   "repository": "https://github.com/anthonymartin/time-series-aggregator",
