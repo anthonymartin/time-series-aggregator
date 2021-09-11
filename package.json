@@ -1,0 +1,27 @@
+{
+  "name": "time-series-aggregator",
+  "version": "1.0.0",
+  "description": "aggregate, max, sum, average, count on arbitrary timeseries datasets",
+  "main": "dist/TimeSeriesAggregator.js",
+  "repository": "https://github.com/anthonymartin/time-series-aggregator",
+  "homepage": "https://github.com/anthonymartin/time-series-aggregator",
+  "author": "Anthony Martin",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@jest/types": "^27.1.1",
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.172",
+    "jest": "^27.1.1",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.33"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
