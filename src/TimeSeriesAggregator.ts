@@ -1,5 +1,5 @@
 import moment, { unitOfTime } from "moment-timezone";
-import HashTable from "./HashTable";
+import HashMap from "./HashMap";
 import _ from "lodash";
 import GroupedCollection from "./GroupedCollection";
 
@@ -8,14 +8,14 @@ export class TimeSeriesAggregator {
   protected collection: object[] = []; // the collection of objects to group and
   protected period: number = 30; // number of days, hours, minutes, etc to group collection by
   protected groupBy: string = "createdAt"; // name of datetime column in the collection that we're grouping items by
-  protected hashTable: HashTable = {}; // aggregated data
+  protected HashMap: HashMap = {}; // aggregated data
   protected array: [][] = []; // aggregated data
-  protected emptyMap: HashTable = {}; // empty map with time buckets
-  protected groupedCollection: HashTable = {}; // grouped collection - may not include data for entire period defined
+  protected emptyMap: HashMap = {}; // empty map with time buckets
+  protected groupedCollection: HashMap = {}; // grouped collection - may not include data for entire period defined
   protected timeZone: string = "UTC"; // timezone of data being passed to TimeSeriesAggregator
   protected endTime: string = moment()
     .tz(this.timeZone)
-    .format(); // by default start time for time series HashTablemap is now, but this could be set to the past if you want to map historical data
+    .format(); // by default start time for time series HashMap is now, but this could be set to the past if you want to map historical data
 
   public constructor() {}
   public setGranularity(type: unitOfTime.StartOf): TimeSeriesAggregator {
@@ -36,8 +36,8 @@ export class TimeSeriesAggregator {
   }
   public aggregate(): TimeSeriesAggregator {
     const groupedCollection = this.groupCollection();
-    this.emptyMap = this.generateHashTableMap();
-    this.hashTable = this.mergeCollectionAndMap(groupedCollection, this.emptyMap);
+    this.emptyMap = this.generateHashMap();
+    this.HashMap = this.mergeCollectionAndMap(groupedCollection, this.emptyMap);
     this.toArray();
     return this;
   }
@@ -57,16 +57,16 @@ export class TimeSeriesAggregator {
    * @param emptyMap
    */
   protected mergeCollectionAndMap(
-    groupedcollection: HashTable,
-    hashTable: HashTable,
-  ): HashTable {
-    this.hashTable = Object.keys(hashTable).reduce((map: HashTable, key: string) => {
+    groupedcollection: HashMap,
+    HashMap: HashMap,
+  ): HashMap {
+    this.HashMap = Object.keys(HashMap).reduce((map: HashMap, key: string) => {
       map[key] = key in groupedcollection ? groupedcollection[key] : [];
       return map;
-    }, {}) as HashTable;
-    return this.hashTable;
+    }, {}) as HashMap;
+    return this.HashMap;
   }
-  protected groupCollection(): HashTable {
+  protected groupCollection(): HashMap {
     let groupedCollection = _.groupBy(this.collection, (element: object) => {
       return moment(element[this.groupBy as keyof object])
         .tz(this.timeZone)
@@ -77,8 +77,8 @@ export class TimeSeriesAggregator {
     return groupedCollection;
   }
   public toArray(): [][] {
-    this.array = Object.keys(this.hashTable).map(key => {
-      return this.hashTable[key];
+    this.array = Object.keys(this.HashMap).map(key => {
+      return this.HashMap[key];
     }) as [];
     return this.array;
   }
@@ -106,10 +106,10 @@ export class TimeSeriesAggregator {
     }
     return new GroupedCollection(_.slice(this.toArray(), start, end));
   }
-  protected generateHashTableMap(): HashTable {
+  protected generateHashMap(): HashMap {
     let i = 0;
-    let HashTableMap: HashTable = Array.from({ length: this.period }).reduce(
-      (map: HashTable): HashTable => {
+    let HashMap: HashMap = Array.from({ length: this.period }).reduce(
+      (map: HashMap): HashMap => {
         let key: string = moment(this.endTime)
           .tz(this.timeZone)
           .subtract(i++, this.granularity as unitOfTime.DurationConstructor) // e.g. days
@@ -119,14 +119,14 @@ export class TimeSeriesAggregator {
         return map;
       },
       {},
-    ) as HashTable;
-    return HashTableMap;
+    ) as HashMap;
+    return HashMap;
   }
   public getEndTime(): string {
     return this.endTime;
   }
-  public getHashTable(): HashTable {
-    return this.hashTable;
+  public getHashMap(): HashMap {
+    return this.HashMap;
   }
 }
 export default TimeSeriesAggregator;

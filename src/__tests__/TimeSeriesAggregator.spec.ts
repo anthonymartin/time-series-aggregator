@@ -60,7 +60,7 @@ test("TimeSeriesAggregator setting timezone transforms dates in collection to sp
     .setTimeZone("Europe/Berlin")
     .aggregate();
   expect(data.getEndTime()).toBe("2019-08-21T12:00:00Z");
-  expect(Object.keys(data.getHashTable())[0]).toEqual(
+  expect(Object.keys(data.getHashMap())[0]).toEqual(
     expect.stringMatching(/.*\+02:00$/),
   );
 });
