@@ -105,12 +105,107 @@ test("can group by non-datetime items like block hashes", () => {
   ).toEqual(HASH_COLLECTION[0]);
 });
 
+test("can get the average price from a collection", () => {
+  const collection = new TimeSeriesAggregator({
+    datetime: false,
+    groupBy: "blockHash",
+    collection: HASH_COLLECTION,
+  });
+  ;
+  expect(
+    collection.aggregate().select(0,2).avg("price")
+  ).toEqual(2080.4389560657155);
+});
+
 export const HASH_COLLECTION = [
   {
       txHash:
         "0xfc204ac2a61ac4fbe6238a062a1d2e1940b0ada29b518a9d87c8ac650c0782d1",
       from: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
       price: 2042.1947803285766,
+      volume: 264.838909,
+      tradeTypeCode: 0,
+      to: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      blockHash:
+        "0xd7aa96574c2ea787e94036eb212743c1a8e51d5ff0628aabc5c501a70c3ab9c6",
+      blockNumber: 28404384,
+      timestamp: 1652737764,
+      tradeType: "Buy",
+      formatted: {
+        amount0: "264.838909",
+        amount1: "-0.129683471699692172",
+        description: "Swapped 264.838909 USDC for 0.12968347169969216 WETH",
+        price: "2042.194780",
+      },
+    },
+    {
+      txHash:
+        "0xfc204ac2a61ac4fbe6238a062a1d2e1940b0ada29b518a9d87c8ac650c0782d1",
+      from: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      price: 2090,
+      volume: 264.838909,
+      tradeTypeCode: 0,
+      to: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      blockHash:
+        "0xd7aa96574c2ea787e94036eb212743c1a8e51d5ff0628aabc5c501a70c3ab9c6",
+      blockNumber: 28404384,
+      timestamp: 1652737764,
+      tradeType: "Buy",
+      formatted: {
+        amount0: "264.838909",
+        amount1: "-0.129683471699692172",
+        description: "Swapped 264.838909 USDC for 0.12968347169969216 WETH",
+        price: "2042.194780",
+      },
+    },
+    {
+      txHash:
+        "0xfc204ac2a61ac4fbe6238a062a1d2e1940b0ada29b518a9d87c8ac650c0782d1",
+      from: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      price: 2090,
+      volume: 264.838909,
+      tradeTypeCode: 0,
+      to: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      blockHash:
+        "0xd7aa96574c2ea787e94036eb212743c1a8e51d5ff0628aabc5c501a70c3ab9c6",
+      blockNumber: 28404384,
+      timestamp: 1652737764,
+      tradeType: "Buy",
+      formatted: {
+        amount0: "264.838909",
+        amount1: "-0.129683471699692172",
+        description: "Swapped 264.838909 USDC for 0.12968347169969216 WETH",
+        price: "2042.194780",
+      },
+    },
+    {},
+    {},
+    {},
+    {
+      txHash:
+        "0xfc204ac2a61ac4fbe6238a062a1d2e1940b0ada29b518a9d87c8ac650c0782d1",
+      from: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      price: 2090,
+      volume: 264.838909,
+      tradeTypeCode: 0,
+      to: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      blockHash:
+        "0xd7aa96574c2ea787e94036eb212743c1a8e51d5ff0628aabc5c501a70c3ab9c6",
+      blockNumber: 28404384,
+      timestamp: 1652737764,
+      tradeType: "Buy",
+      formatted: {
+        amount0: "264.838909",
+        amount1: "-0.129683471699692172",
+        description: "Swapped 264.838909 USDC for 0.12968347169969216 WETH",
+        price: "2042.194780",
+      },
+    },
+    {
+      txHash:
+        "0xfc204ac2a61ac4fbe6238a062a1d2e1940b0ada29b518a9d87c8ac650c0782d1",
+      from: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",
+      price: 2090,
       volume: 264.838909,
       tradeTypeCode: 0,
       to: "0x5b2f6835D82504c214e8Ac6d30f6B22d49797dd0",

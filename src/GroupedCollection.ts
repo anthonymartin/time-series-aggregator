@@ -44,14 +44,19 @@ export default class GroupedCollection {
    * @param property
    */
   public avg(property: string): number {
-    return this.data.reduce((sum, group) => {
+    let count = 0;
+    const sum =  this.data.reduce((sum, group) => {
       group.forEach((member: any) => {
         if (_.get(member, `${property}`)) {
+          count++;
           sum += _.get(member, `${property}`) || 0;
         }
       });
-      return sum / group.length;
+      return sum;
     }, 0);
+    const denominotor = count;
+    
+    return denominotor ? sum / denominotor : 0;
   }
 
   public toArray(): [][] {
